@@ -86,11 +86,13 @@
             type="date"
             id="birthday"
             v-model="clientInfo.birthday"
-            @input="$v.clientInfo.birthday.$touch()"
+            @blur="$v.clientInfo.birthday.$touch()"
           />
-          <span class="signup__error" v-if="!$v.clientInfo.birthday.required"
+          <div v-if="$v.clientInfo.birthday.$dirty">
+            <span class="signup__error" v-if="!$v.clientInfo.birthday.required"
             >Обязательное поле</span
-          >
+            >
+          </div>
         </div>
 
         <div
@@ -127,24 +129,27 @@
           </select>
         </div>
 
-        <div class="signup__field">
+        <div class="signup__field"  :class="{ 'signup__selector-error': $v.clientInfo.clients.$error }">
           <label class="signup__label" for="clients">Группа клиентов*</label>
           <select
-            class="signup__selector"
+            class="signup__selector "
             id="clients"
             multiple
             size="3"
+            @blur="$v.clientInfo.clients.$touch()"
             v-model="clientInfo.clients"
           >
             <option value="vip">VIP</option>
             <option value="problematical">Проблемные</option>
             <option value="insurance">ОМС</option>
           </select>
-          <span
-            class="signup__error signup__error_clients"
-            v-if="!$v.clientInfo.clients.required"
+          <div v-if="$v.clientInfo.clients.$dirty">
+            <span
+                class="signup__error signup__error_clients"
+                v-if="!$v.clientInfo.clients.required"
             >Обязательное поле</span
-          >
+            >
+          </div>
         </div>
 
         <div class="signup__field">
@@ -172,6 +177,7 @@
             class="signup__input"
             type="text"
             id="zip"
+            @input="$v.address.zip.$touch()"
             v-model="address.zip"
           />
           <span class="signup__error" v-if="!$v.address.zip.minLength"
@@ -250,21 +256,25 @@
 
         <div
           class="signup__field"
-          :class="{ signup__invalid: $v.passport.document.$error }"
+          :class="{ 'signup__selector-error': $v.passport.document.$error }"
         >
           <label class="signup__label" for="document">Тип документа*</label>
           <select
             class="signup__selector"
             id="document"
+            @blur="$v.passport.document.$touch()"
             v-model="passport.document"
           >
             <option value="passport">Паспорт</option>
             <option value="birthCert">Свидетельство о рождении</option>
             <option value="drivingLic">Вод. удостоверение</option>
           </select>
-          <span class="signup__error" v-if="!$v.passport.document.required"
-            >Обязательное поле</span
-          >
+          <div v-if="$v.passport.document.$dirty">
+             <span class="signup__error" v-if="!$v.passport.document.required"
+             >Обязательное поле</span
+             >
+          </div>
+
         </div>
 
         <div class="signup__field">
@@ -297,17 +307,20 @@
           />
         </div>
 
-        <div class="signup__field">
+        <div class="signup__field" :class="{ signup__invalid: $v.passport.issueDate.$error }">
           <label class="signup__label" for="issueDate">Дата выдачи*</label>
           <input
             class="signup__input"
             type="date"
             id="issueDate"
+            @blur="$v.passport.issueDate.$touch()"
             v-model="passport.issueDate"
           />
-          <span class="signup__error" v-if="!$v.passport.issueDate.required"
-            >Обязательное поле</span
-          >
+          <div v-if="$v.passport.issueDate.$dirty">
+            <span class="signup__error" v-if="!$v.passport.issueDate.required"
+              >Обязательное поле</span
+            >
+          </div>
         </div>
 
           <div class="signup__submit-wrapper">
@@ -445,10 +458,16 @@ import { required, numeric, minLength, maxLength } from 'vuelidate/lib/validator
 <style lang="sass" scoped>
 $formBorder: 1px solid #ccc
 $mainColor: #00b4ed
+$errorBorder: 1px solid red
 
 .signup__field.signup__invalid
   .signup__input
-    border: 1px solid red
+    border: $errorBorder
+    background-color: #ffc9aa
+
+.signup__field.signup__selector-error
+  .signup__selector
+    border: $errorBorder
     background-color: #ffc9aa
 
 .signup__submit-wrapper
@@ -477,6 +496,7 @@ $mainColor: #00b4ed
   border: $formBorder
   font: inherit
 
+
 .signup__label
   display: block
   color: #4e4e4e
@@ -502,6 +522,7 @@ $mainColor: #00b4ed
   padding: 6px 12px
   box-sizing: border-box
   border: $formBorder
+
 
 .signup__input:focus
   outline: none
