@@ -23,6 +23,5 @@ export default new Vuex.Store({
     createNewUser({ commit }, payload) {
       commit("CREATE_NEW_USER", payload);
     }
-  },
-  modules: {}
+  }
 });
