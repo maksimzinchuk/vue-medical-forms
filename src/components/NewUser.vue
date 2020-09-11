@@ -69,7 +69,7 @@
             <span class="signup__error" v-if="!$v.clientInfo.secondName.minLength"
             >Отчество должно содержать хотя бы {{$v.clientInfo.secondName.$params.minLength.min}} буквы</span
             >
-            <span class="signup__error" v-if="!$v.clientInfo.secondName.alpha"
+            <span class="signup__error" v-else-if="!$v.clientInfo.secondName.alpha"
             >Отчество должно состоять из русских букв</span
             >
           </div>
@@ -176,6 +176,9 @@
           />
           <span class="signup__error" v-if="!$v.address.zip.minLength"
           >Индекс должен содержать {{$v.address.zip.$params.minLength.min}} цифр</span
+          >
+          <span class="signup__error" v-else-if="!$v.address.zip.maxLength"
+          >Индекс должен содержать не больше {{$v.address.zip.$params.maxLength.max}} цифр</span
           >
           <span class="signup__error" v-else-if="!$v.address.zip.numeric"
           >Индекс может содержать только цифры</span
