@@ -145,7 +145,7 @@
           </select>
           <div v-if="$v.clientInfo.clients.$dirty">
             <span
-                class="signup__error signup__error_clients"
+                class="signup__error"
                 v-if="!$v.clientInfo.clients.required"
             >Обязательное поле</span
             >
@@ -478,7 +478,6 @@ $errorBorder: 1px solid red
   margin: 16px 0 0
   text-align: center
 
-
 .signup__form
   max-width: 400px
   margin: 30px auto
@@ -496,7 +495,6 @@ $errorBorder: 1px solid red
   border: $formBorder
   font: inherit
 
-
 .signup__label
   display: block
   color: #4e4e4e
@@ -511,10 +509,6 @@ $errorBorder: 1px solid red
   margin-left: 14px
   color: red
   position: absolute
-  top: 65px
-  left: 0
-  &_clients
-    top: 110px
 
 .signup__input
   font: inherit
@@ -522,7 +516,6 @@ $errorBorder: 1px solid red
   padding: 6px 12px
   box-sizing: border-box
   border: $formBorder
-
 
 .signup__input:focus
   outline: none
@@ -536,12 +529,10 @@ $errorBorder: 1px solid red
   font: inherit
   cursor: pointer
 
-
 .signup__button:hover,
 .signup__button:active
   background-color: $mainColor
   color: white
-
 
 .signup__button[disabled]
   border: $formBorder
