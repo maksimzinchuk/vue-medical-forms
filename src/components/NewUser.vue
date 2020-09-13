@@ -110,18 +110,22 @@
             @input="$v.clientInfo.phone.$touch()"
             @blur="$v.clientInfo.phone.$touch()"
           />
-          <span class="signup__error" v-if="!$v.clientInfo.phone.firstDigit"
-            >Введите номер телефона начиная с 7</span
-          >
-          <div v-else>
-            <span class="signup__error" v-if="!$v.clientInfo.phone.minLength"
-            >Телефон должен содержать не менее {{$v.clientInfo.phone.$params.minLength.min}} цифр</span
-            >
-            <span class="signup__error" v-if="!$v.clientInfo.phone.maxLength"
-            >Телефон должен содержать не более {{$v.clientInfo.phone.$params.maxLength.max}} цифр</span
-            >
+          <div v-if="$v.clientInfo.phone.$dirty">
+              <span class="signup__error" v-if="!$v.clientInfo.phone.required"
+              >Обязательное поле</span
+              >
+              <span class="signup__error" v-if="!$v.clientInfo.phone.firstDigit"
+              >Введите номер телефона начиная с 7</span
+              >
+              <div v-else>
+              <span class="signup__error" v-if="!$v.clientInfo.phone.minLength"
+              >Телефон должен содержать не менее {{$v.clientInfo.phone.$params.minLength.min}} цифр</span
+              >
+                <span class="signup__error" v-if="!$v.clientInfo.phone.maxLength"
+                >Телефон должен содержать не более {{$v.clientInfo.phone.$params.maxLength.max}} цифр</span
+                >
+              </div>
           </div>
-
         </div>
 
         <div class="signup__field">
@@ -183,16 +187,17 @@
             @input="$v.address.zip.$touch()"
             v-model="address.zip"
           />
-          <span class="signup__error" v-if="!$v.address.zip.minLength"
-          >Индекс должен содержать {{$v.address.zip.$params.minLength.min}} цифр</span
-          >
-          <span class="signup__error" v-else-if="!$v.address.zip.maxLength"
-          >Индекс должен содержать не больше {{$v.address.zip.$params.maxLength.max}} цифр</span
-          >
-          <span class="signup__error" v-else-if="!$v.address.zip.numeric"
-          >Индекс может содержать только цифры</span
-          >
-
+          <div v-if="$v.address.zip.$dirty">
+              <span class="signup__error" v-if="!$v.address.zip.minLength"
+              >Индекс должен содержать {{$v.address.zip.$params.minLength.min}} цифр</span
+              >
+              <span class="signup__error" v-else-if="!$v.address.zip.maxLength"
+              >Индекс должен содержать не больше {{$v.address.zip.$params.maxLength.max}} цифр</span
+              >
+              <span class="signup__error" v-else-if="!$v.address.zip.numeric"
+              >Индекс может содержать только цифры</span
+              >
+         </div>
         </div>
         <div class="signup__field" :class="{ signup__invalid: $v.address.country.$error }">
           <label class="signup__label" for="country">Страна</label>
