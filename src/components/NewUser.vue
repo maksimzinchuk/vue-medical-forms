@@ -13,6 +13,7 @@
             id="surname"
             v-model="clientInfo.surname"
             @input="$v.clientInfo.surname.$touch()"
+            @blur="$v.clientInfo.surname.$touch()"
           />
           <div v-if="$v.clientInfo.surname.$dirty">
             <span class="signup__error" v-if="!$v.clientInfo.surname.required"
@@ -39,6 +40,7 @@
             id="name"
             v-model="clientInfo.name"
             @input="$v.clientInfo.name.$touch()"
+            @blur="$v.clientInfo.name.$touch()"
           />
           <div v-if="$v.clientInfo.name.$dirty">
             <span class="signup__error" v-if="!$v.clientInfo.name.required"
@@ -106,6 +108,7 @@
             id="phone"
             v-model="clientInfo.phone"
             @input="$v.clientInfo.phone.$touch()"
+            @blur="$v.clientInfo.phone.$touch()"
           />
           <span class="signup__error" v-if="!$v.clientInfo.phone.firstDigit"
             >Введите номер телефона начиная с 7</span
@@ -221,6 +224,7 @@
             id="city"
             v-model="address.city"
             @input="$v.address.city.$touch()"
+            @blur="$v.address.city.$touch()"
           />
           <div v-if="$v.address.city.$dirty">
             <span class="signup__error" v-if="!$v.address.city.required"
