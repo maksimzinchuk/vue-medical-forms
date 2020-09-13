@@ -118,9 +118,9 @@
               >Введите номер телефона начиная с 7</span
               >
               <div v-else>
-              <span class="signup__error" v-if="!$v.clientInfo.phone.minLength"
-              >Телефон должен содержать не менее {{$v.clientInfo.phone.$params.minLength.min}} цифр</span
-              >
+                <span class="signup__error" v-if="!$v.clientInfo.phone.minLength"
+                >Телефон должен содержать не менее {{$v.clientInfo.phone.$params.minLength.min}} цифр</span
+                >
                 <span class="signup__error" v-if="!$v.clientInfo.phone.maxLength"
                 >Телефон должен содержать не более {{$v.clientInfo.phone.$params.maxLength.max}} цифр</span
                 >
@@ -206,7 +206,13 @@
             type="text"
             id="country"
             v-model="address.country"
+            @input="$v.address.country.$touch()"
           />
+          <div v-if="$v.address.country.$dirty">
+            <span class="signup__error" v-if="!$v.address.country.minLength"
+              >Страна должна содержать хотя бы {{$v.address.country.$params.minLength.min}} буквы</span
+              >
+          </div>
         </div>
         <div class="signup__field" :class="{ signup__invalid: $v.address.region.$error }">
           <label class="signup__label" for="region">Область</label>
@@ -215,7 +221,13 @@
             type="text"
             id="region"
             v-model="address.region"
+            @input="$v.address.region.$touch()"
           />
+          <div v-if="$v.address.region.$dirty">
+            <span class="signup__error" v-if="!$v.address.region.minLength"
+            >Область должна содержать хотя бы {{$v.address.region.$params.minLength.min}} буквы</span
+            >
+          </div>
         </div>
 
         <div
@@ -248,7 +260,13 @@
             type="text"
             id="street"
             v-model="address.street"
+            @input="$v.address.street.$touch()"
           />
+          <div v-if="$v.address.street.$dirty">
+            <span class="signup__error" v-if="!$v.address.street.minLength"
+            >Улица должна содержать хотя бы {{$v.address.street.$params.minLength.min}} букв</span
+            >
+          </div>
         </div>
 
         <div class="signup__field">
