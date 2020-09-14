@@ -4,6 +4,7 @@ import store from './store'
 
 import Vuelidate from 'vuelidate'
 
+Vue.config.devtools = true;
 Vue.use(Vuelidate)
 
 
